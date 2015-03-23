@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol DropDownTableViewDelegate {
+protocol DropDownTableViewDelegate
+{
     func dropDownTableView(tableView: UITableView, numberOfRowsInSectionWhenOpened section: Int) -> Int
     func numberOfSections(tableView: UITableView) -> Int
     func dropDownTableView(tableView: UITableView, dropDownRowForSection section: Int) -> DropDownRow
