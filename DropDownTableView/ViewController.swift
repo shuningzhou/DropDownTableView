@@ -42,6 +42,8 @@ class ViewController: DropDownTableViewController, DropDownTableViewDelegate
         sections.append(section4)
     }
     
+    // MARK: - DropDownTableViewDelegate methods
+    
     func dropDownTableView(tableView: UITableView, numberOfRowsInSectionWhenOpened section: Int) -> Int
     {
         var dropDownSection = sections[section] as DropDownRow
