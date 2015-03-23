@@ -22,6 +22,7 @@ class DropDownTableViewCell: UITableViewCell
     var isSectionRow = false
     var isOpened = false
     var lastCellInSection = false
+    var expandable = false
     var titleLabel: UILabel
     var detailLabel: UILabel
     var seperator: UIView
@@ -29,7 +30,7 @@ class DropDownTableViewCell: UITableViewCell
     var lineVertical: UIView
     var lineHorizontal: UIView
     var expandView : UIImageView
-    weak var section : DropDownSection? = nil
+    weak var dropDownRow : DropDownRow? = nil
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
@@ -167,7 +168,7 @@ class DropDownTableViewCell: UITableViewCell
 
     func showExpandButton()
     {
-        if(!isSectionRow)
+        if(!isSectionRow || !expandable)
         {
             expandView.hidden = true
             return
