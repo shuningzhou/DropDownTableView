@@ -35,26 +35,26 @@ class DropDownTableViewCell: UITableViewCell
     {
         titleLabel = UILabel(frame: CGRect.nullRect)
         titleLabel.textColor = UIColor.blackColor()
-        titleLabel.font = UIFont.boldSystemFontOfSize(18)
+        titleLabel.font = TITLE_FONT
         titleLabel.textAlignment = .Left
         titleLabel.backgroundColor = UIColor.clearColor()
         
         detailLabel = UILabel(frame: CGRect.nullRect)
         detailLabel.textColor = UIColor.blackColor()
-        detailLabel.font = UIFont.systemFontOfSize(14)
+        detailLabel.font = DETAIL_FONT
         detailLabel.textAlignment = .Left
         detailLabel.backgroundColor = UIColor.clearColor()
         
         seperator = UIView(frame: CGRect.nullRect)
-        seperator.backgroundColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+        seperator.backgroundColor = GREY_COLOR
      
         lineVertical = UIView(frame: CGRect.nullRect)
-        lineVertical.backgroundColor = UIColor(red: 8/255, green: 111/255, blue: 180/255, alpha: 1)
+        lineVertical.backgroundColor = BLUE_COLOR
         
         lineHorizontal = UIView(frame: CGRect.nullRect)
-        lineHorizontal.backgroundColor = UIColor(red: 8/255, green: 111/255, blue: 180/255, alpha: 1)
+        lineHorizontal.backgroundColor = BLUE_COLOR
         
-        expandView = UIImageView(image: UIImage(named: "arrowDown"))
+        expandView = UIImageView(image: EXPANDVIEW_IMAGE)
         
         thumbNail = DropDownThumbNail(frame: CGRect.nullRect)
         
@@ -121,21 +121,21 @@ class DropDownTableViewCell: UITableViewCell
         {
             lineVertical.hidden = false
             lineHorizontal.hidden = true
-            lineVertical.frame = CGRect(x: 24, y: bounds.size.height - 8, width: 2, height: 8)
+            lineVertical.frame = CGRect(x: (THUMBNAIL_CONTAINER_WIDTH - STROKE_WIDTH) / 2, y: bounds.size.height - 2 * PADDING + STROKE_WIDTH, width: STROKE_WIDTH, height: 8)
         }
         else if(lastCellInSection)
         {
             lineVertical.hidden = false
             lineHorizontal.hidden = false
-            lineVertical.frame = CGRect(x: 24, y: 0, width: 2, height: bounds.size.height / 2)
-            lineHorizontal.frame = CGRect(x: 24, y: bounds.size.height / 2 - 1, width: 50 - 24 - 2, height: 2)
+            lineVertical.frame = CGRect(x: (THUMBNAIL_CONTAINER_WIDTH - STROKE_WIDTH) / 2, y: 0, width: STROKE_WIDTH, height: bounds.size.height / 2)
+            lineHorizontal.frame = CGRect(x: (THUMBNAIL_CONTAINER_WIDTH - STROKE_WIDTH) / 2, y: bounds.size.height / 2 - 1, width: (THUMBNAIL_CONTAINER_WIDTH) / 2, height: 2)
         }
         else
         {
             lineVertical.hidden = false
             lineHorizontal.hidden = false
-            lineVertical.frame = CGRect(x: 24, y: 0, width: 2, height: bounds.size.height)
-            lineHorizontal.frame = CGRect(x: 24, y: bounds.size.height / 2 - 1, width: 50 - 24 - 2, height: 2)
+            lineVertical.frame = CGRect(x: (THUMBNAIL_CONTAINER_WIDTH - STROKE_WIDTH) / 2, y: 0, width: STROKE_WIDTH, height: bounds.size.height)
+            lineHorizontal.frame = CGRect(x: (THUMBNAIL_CONTAINER_WIDTH - STROKE_WIDTH) / 2, y: bounds.size.height / 2 - 1, width: (THUMBNAIL_CONTAINER_WIDTH) / 2, height: 2)
         }
     }
     
@@ -143,13 +143,13 @@ class DropDownTableViewCell: UITableViewCell
     {
         if(isSectionRow)
         {
-            titleLabel.frame = CGRect(x: 50, y: 5, width: bounds.size.width - 50 - 50, height: 25)
-            detailLabel.frame = CGRect(x: 50, y: 31, width: bounds.size.width - 50 - 50, height: 14)
+            titleLabel.frame = CGRect(x: THUMBNAIL_CONTAINER_WIDTH, y: PADDING, width: bounds.size.width - 2 * (THUMBNAIL_CONTAINER_WIDTH), height: ROW_HEIGHT / 2)
+            detailLabel.frame = CGRect(x: THUMBNAIL_CONTAINER_WIDTH, y: PADDING + ROW_HEIGHT / 2 + 1, width: bounds.size.width - 2 * (THUMBNAIL_CONTAINER_WIDTH), height: ROW_HEIGHT / 2 - 2 * PADDING - 1)
         }
         else
         {
-            titleLabel.frame = CGRect(x: 90, y: 5, width: bounds.size.width - 100 - 50, height: 22)
-            detailLabel.frame = CGRect(x: 90, y: 29, width: bounds.size.width - 100 - 50, height: 12)
+            titleLabel.frame = CGRect(x: 2 * (THUMBNAIL_CONTAINER_WIDTH) - 3 * PADDING, y: PADDING, width: bounds.size.width - 3 * (THUMBNAIL_CONTAINER_WIDTH), height:  ROW_HEIGHT / 2)
+            detailLabel.frame = CGRect(x: 2 * (THUMBNAIL_CONTAINER_WIDTH) - 3 * PADDING, y: PADDING + ROW_HEIGHT / 2 + 1, width: bounds.size.width - 3 * (THUMBNAIL_CONTAINER_WIDTH), height: ROW_HEIGHT / 2 - 2 * PADDING - 1)
         }
     }
     
@@ -157,11 +157,11 @@ class DropDownTableViewCell: UITableViewCell
     {
         if(isSectionRow)
         {
-            thumbNail.frame = CGRect(x: 10, y: 10, width: 30, height: 30)
+            thumbNail.frame = CGRect(x: 2 * PADDING, y: 2 * PADDING, width: THUMBNAIL_WIDTH, height: THUMBNAIL_WIDTH)
         }
         else
         {
-            thumbNail.frame = CGRect(x: 50, y: 10, width: 30, height: 30)
+            thumbNail.frame = CGRect(x: THUMBNAIL_CONTAINER_WIDTH, y: 2 * PADDING, width: THUMBNAIL_WIDTH, height: THUMBNAIL_WIDTH)
         }
     }
 
@@ -174,7 +174,7 @@ class DropDownTableViewCell: UITableViewCell
         }
         
         expandView.hidden = false
-        expandView.frame = CGRect(x: bounds.size.width - 50 + (50 - 21) / 2, y: (bounds.size.height - 10.5 ) / 2, width: 21, height: 10.5)
+        expandView.frame = CGRect(x: bounds.size.width - THUMBNAIL_CONTAINER_WIDTH + (THUMBNAIL_CONTAINER_WIDTH - ARROW_WIDTH) / 2, y: (bounds.size.height - ARROW_HEIGHT ) / 2, width: ARROW_WIDTH, height: ARROW_HEIGHT)
         
         if(isOpened)
         {
@@ -212,7 +212,7 @@ class DropDownTableViewCell: UITableViewCell
         else
         {
             seperator.hidden = false
-            seperator.frame = CGRect(x: 50, y: bounds.size.height - 1, width: bounds.size.width - 50, height: 1)
+            seperator.frame = CGRect(x: THUMBNAIL_CONTAINER_WIDTH, y: bounds.size.height - 1, width: bounds.size.width - THUMBNAIL_CONTAINER_WIDTH, height: 1)
         }
     }
 }

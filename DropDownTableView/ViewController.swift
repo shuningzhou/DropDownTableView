@@ -21,7 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.registerClass(DropDownTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         tableView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         tableView.delegate = self
-        tableView.rowHeight = 50
+        tableView.rowHeight = ROW_HEIGHT
         tableView.separatorStyle = .None
         tableView.dataSource = self
         self.view.addSubview(tableView)

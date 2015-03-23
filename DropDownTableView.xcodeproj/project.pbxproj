@@ -21,6 +21,7 @@
 		618D29071AB8CCE0002F74CD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 618D29061AB8CCE0002F74CD /* Images.xcassets */; };
 		618D290A1AB8CCE0002F74CD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 618D29081AB8CCE0002F74CD /* LaunchScreen.xib */; };
 		618D29161AB8CCE0002F74CD /* DropDownTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618D29151AB8CCE0002F74CD /* DropDownTableViewTests.swift */; };
+		61DBC8591AC0836300572F33 /* DropDownTableViewDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DBC8581AC0836300572F33 /* DropDownTableViewDefine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		618D290F1AB8CCE0002F74CD /* DropDownTableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropDownTableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		618D29141AB8CCE0002F74CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		618D29151AB8CCE0002F74CD /* DropDownTableViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTableViewTests.swift; sourceTree = "<group>"; };
+		61DBC8581AC0836300572F33 /* DropDownTableViewDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewDefine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				61785C201AB9F18D0027C2EB /* DropDownThumbNailCompleted.swift */,
 				61785C221AB9F1A10027C2EB /* DropDownThumbNailIncomplete.swift */,
 				61785C241AB9F1B80027C2EB /* DropDownThumbNailOverdue.swift */,
+				61DBC8581AC0836300572F33 /* DropDownTableViewDefine.swift */,
 				618D29081AB8CCE0002F74CD /* LaunchScreen.xib */,
 				618D29031AB8CCE0002F74CD /* Main.storyboard */,
 				618D29061AB8CCE0002F74CD /* Images.xcassets */,
@@ -240,6 +243,7 @@
 				61785C1B1AB8E26B0027C2EB /* DropDownTableViewCell.swift in Sources */,
 				61785C251AB9F1B80027C2EB /* DropDownThumbNailOverdue.swift in Sources */,
 				61785C211AB9F18D0027C2EB /* DropDownThumbNailCompleted.swift in Sources */,
+				61DBC8591AC0836300572F33 /* DropDownTableViewDefine.swift in Sources */,
 				61785C231AB9F1A10027C2EB /* DropDownThumbNailIncomplete.swift in Sources */,
 				61785C271AB9F9B90027C2EB /* DropDownThumbNail.swift in Sources */,
 				61785C1F1AB9F17D0027C2EB /* DropDownThumbNailDue.swift in Sources */,
