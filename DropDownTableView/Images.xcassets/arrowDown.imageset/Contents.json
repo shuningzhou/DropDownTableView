@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "764-arrow-down.png"
+      "filename" : "GreyDownArrow1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "764-arrow-down@2x.png"
+      "filename" : "GreyDownArrow2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "GreyDownArrow3x.png"
     }
   ],
   "info" : {
