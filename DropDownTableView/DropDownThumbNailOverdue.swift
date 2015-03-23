@@ -41,20 +41,20 @@ class DropDownThumbNailOverdue : DropDownThumbNail
         CGContextSetFillColorWithColor(context, yellowColor)
         CGContextFillPath(context)
         
-        var top = padding + length * 0.37
-        var ratio : CGFloat = 8
+        var top = padding + length * (EXCLAMATION_TOP_PADDING_RATIO)
+        var ratio : CGFloat = EXCLAMATION_WIDTH_HEIGHT_RATIO
         
         //draw exclamation mark
         CGContextMoveToPoint(context, width / 2 - length / (2 * ratio), top + length / (2 * ratio))
-        CGContextAddLineToPoint(context, width / 2 - length / (4 * ratio), top + length * 0.35)
-        CGContextAddLineToPoint(context,  width / 2 + length / (4 * ratio), top + length * 0.35)
+        CGContextAddLineToPoint(context, width / 2 - length / (4 * ratio), top + length * EXCLAMATION_HEIGHT_RATIO)
+        CGContextAddLineToPoint(context,  width / 2 + length / (4 * ratio), top + length * EXCLAMATION_HEIGHT_RATIO)
         CGContextAddLineToPoint(context, width / 2 + length / (2 * ratio), top + length / (2 * ratio))
         CGContextAddArcToPoint(context, width / 2 + length / (2 * ratio), top, width / 2 - length / (2 * ratio), top, length / (2 * ratio))
         CGContextAddArcToPoint(context, width / 2 - length / (2 * ratio), top, width / 2 - length / (2 * ratio), top + length / ratio, length / (2 * ratio))
         CGContextSetFillColorWithColor(context, blueColor)
         CGContextFillPath(context)
         
-        let rectangle = CGRectMake(width / 2 - length / 20, top + length * 0.35 +  length / 20, length / 10,  length / 10)
+        let rectangle = CGRectMake(width / 2 - length / 20, top + length * EXCLAMATION_HEIGHT_RATIO +  length / 20, length / 10,  length / 10)
         CGContextFillEllipseInRect(context, rectangle)
     }
 }

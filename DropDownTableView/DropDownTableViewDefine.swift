@@ -16,6 +16,10 @@ let ROW_HEIGHT : CGFloat = 50.0
 let ARROW_WIDTH : CGFloat = 21.0
 let ARROW_HEIGHT : CGFloat = 10.5
 
+let EXCLAMATION_WIDTH_HEIGHT_RATIO : CGFloat = 8.0
+let EXCLAMATION_TOP_PADDING_RATIO : CGFloat = 0.37
+let EXCLAMATION_HEIGHT_RATIO : CGFloat = 0.35
+
 let TITLE_FONT : UIFont = UIFont.boldSystemFontOfSize(18)
 let DETAIL_FONT : UIFont = UIFont.systemFontOfSize(14)
 
