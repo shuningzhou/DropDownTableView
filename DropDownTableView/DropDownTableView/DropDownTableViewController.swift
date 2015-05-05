@@ -12,8 +12,11 @@ protocol DropDownTableViewDelegate
 {
     func dropDownTableView(tableView: UITableView, numberOfRowsInSectionWhenOpened section: Int) -> Int
     func numberOfSections(tableView: UITableView) -> Int
-    func dropDownTableView(tableView: UITableView, dropDownRowForSection section: Int) -> DropDownRow
-    func dropDownTableView(tableView: UITableView, dropDownRowForSection section: Int, andRow row: Int) -> DropDownRow
+    func prepareTableView(tableView: UITableView, Section section: Int, Cell cell: DropDownTableViewCell) -> DropDownTableViewCell
+    func prepareTableView(tableView: UITableView, Section section: Int, Row row: Int, Cell cell: DropDownTableViewCell) -> DropDownTableViewCell
+    
+    func selectedTableView(tableView: UITableView, Section section: Int)
+    func selectedTableView(tableView: UITableView, Section section: Int, Row row: Int)
 }
 
 
@@ -38,16 +41,7 @@ class DropDownTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        let dropDownRow = dropDownTableViewDelegate!.dropDownTableView(tableView, dropDownRowForSection: section)
-        
-        if(dropDownRow.isOpened)
-        {
-            return dropDownTableViewDelegate!.dropDownTableView(tableView, numberOfRowsInSectionWhenOpened: section)
-        }
-        else
-        {
-            return 1
-        }
+        return dropDownTableViewDelegate!.dropDownTableView(tableView, numberOfRowsInSectionWhenOpened: section) + 1
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -61,35 +55,25 @@ class DropDownTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier, forIndexPath: indexPath) as DropDownTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier, forIndexPath: indexPath) as! DropDownTableViewCell
         
         let section = indexPath.section
         let row = indexPath.row
         
-        var dropDownRow = dropDownTableViewDelegate!.dropDownTableView(tableView, dropDownRowForSection: section)
-        
-        cell.isOpened = dropDownRow.isOpened
-        
         if(row == 0)
         {
             cell.isSectionRow = true
-            cell.titleLabel.text = dropDownRow.title
-            cell.detailLabel.text = dropDownRow.detail
-            cell.dropDownRow = dropDownRow
-            cell.setThumbNailType(dropDownRow.thumbNailType, isLarge: true)
-            let count = dropDownRow.subRows.count
-            cell.expandable = count > 0
+            dropDownTableViewDelegate!.prepareTableView(tableView, Section: section, Cell: cell)
+            
         }
         else
         {
-            var subRow = dropDownRow.subRows[row - 1] as DropDownRow
             cell.isSectionRow = false
-            cell.titleLabel.text = subRow.title
-            cell.detailLabel.text = subRow.detail
-            cell.setThumbNailType(subRow.thumbNailType, isLarge: false)
+            dropDownTableViewDelegate!.prepareTableView(tableView, Section: section, Row: row - 1, Cell: cell)
         }
         
-        if(row == dropDownRow.subRows.count && dropDownRow.subRows.count > 0)
+        var numberOfRows = self.tableView(tableView, numberOfRowsInSection: section) - 1
+        if(row == numberOfRows && row > 0)
         {
             cell.lastCellInSection = true
         }
@@ -108,47 +92,12 @@ class DropDownTableViewController: UIViewController, UITableViewDataSource, UITa
         
         if(row == 0)
         {
-            var cell = tableView.cellForRowAtIndexPath(indexPath) as DropDownTableViewCell
+            dropDownTableViewDelegate!.selectedTableView(tableView, Section: section);
+        }
+        else
             
-            if !cell.expandable
-            {
-                return
-            }
-            
-            var dropDownRow = dropDownTableViewDelegate!.dropDownTableView(tableView, dropDownRowForSection: section)
-            dropDownRow.isOpened = !dropDownRow.isOpened
-
-            cell.isOpened = dropDownRow.isOpened
-            cell.setNeedsDisplay()
-            
-            if(dropDownRow.isOpened)
-            {
-                let indexPaths = NSMutableArray()
-                
-                for index in 1...dropDownRow.subRows.count
-                {
-                    let indexPath = NSIndexPath(forRow: index, inSection: section)
-                    indexPaths.addObject(indexPath)
-                }
-                
-                tableView.beginUpdates()
-                tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Middle)
-                tableView.endUpdates()
-            }
-            else
-            {
-                let indexPaths = NSMutableArray()
-                
-                for index in 1...dropDownRow.subRows.count
-                {
-                    let indexPath = NSIndexPath(forRow: index, inSection: section)
-                    indexPaths.addObject(indexPath)
-                }
-                
-                tableView.beginUpdates()
-                tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Middle)
-                tableView.endUpdates()
-            }
+        {
+            dropDownTableViewDelegate!.selectedTableView(tableView, Section: section, Row: row - 1);
         }
     }
     

@@ -20,16 +20,13 @@ enum ThumbNailType
 class DropDownTableViewCell: UITableViewCell
 {
     var isSectionRow = false
-    var isOpened = false
     var lastCellInSection = false
-    var expandable = false
     var titleLabel: UILabel
     var detailLabel: UILabel
     var seperator: UIView
     var thumbNail: DropDownThumbNail
     var lineVertical: UIView
     var lineHorizontal: UIView
-    var expandView : UIImageView
     weak var dropDownRow : DropDownRow? = nil
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
@@ -48,14 +45,12 @@ class DropDownTableViewCell: UITableViewCell
         
         seperator = UIView(frame: CGRect.nullRect)
         seperator.backgroundColor = GREY_COLOR
-     
+        
         lineVertical = UIView(frame: CGRect.nullRect)
         lineVertical.backgroundColor = BLUE_COLOR
         
         lineHorizontal = UIView(frame: CGRect.nullRect)
         lineHorizontal.backgroundColor = BLUE_COLOR
-        
-        expandView = UIImageView(image: EXPANDVIEW_IMAGE)
         
         thumbNail = DropDownThumbNail(frame: CGRect.nullRect)
         
@@ -68,9 +63,8 @@ class DropDownTableViewCell: UITableViewCell
         addSubview(seperator)
         addSubview(lineVertical)
         addSubview(lineHorizontal)
-        addSubview(expandView)
     }
-
+    
     required init(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
@@ -101,23 +95,15 @@ class DropDownTableViewCell: UITableViewCell
     override func layoutSubviews()
     {
         super.layoutSubviews()
-
+        
         layoutLines()
         layoutLabels()
         layoutThumbNail()
-        showExpandButton()
         showSeperatorIfNeeded()
     }
     
     func layoutLines()
     {
-        if(!isOpened)
-        {
-            lineVertical.hidden = true
-            lineHorizontal.hidden = true
-            return
-        }
-        
         if(isSectionRow)
         {
             lineVertical.hidden = false
@@ -165,48 +151,10 @@ class DropDownTableViewCell: UITableViewCell
             thumbNail.frame = CGRect(x: THUMBNAIL_CONTAINER_WIDTH, y: 2 * PADDING, width: THUMBNAIL_WIDTH, height: THUMBNAIL_WIDTH)
         }
     }
-
-    func showExpandButton()
-    {
-        if(!isSectionRow || !expandable)
-        {
-            expandView.hidden = true
-            return
-        }
-        
-        expandView.hidden = false
-        expandView.frame = CGRect(x: bounds.size.width - THUMBNAIL_CONTAINER_WIDTH + (THUMBNAIL_CONTAINER_WIDTH - ARROW_WIDTH) / 2, y: (bounds.size.height - ARROW_HEIGHT ) / 2, width: ARROW_WIDTH, height: ARROW_HEIGHT)
-        
-        if(isOpened)
-        {
-            UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-                let rotationAngleDegrees = -180.0
-                let rotationAngleRadians = rotationAngleDegrees * (M_PI/180)
-                var transform = CATransform3DIdentity
-                transform = CATransform3DRotate(transform, CGFloat(rotationAngleRadians), 0.0, 0.0, 1.0)
-                self.expandView.layer.transform = transform
-                },
-                completion: { finished in
-            })
-        }
-        else
-        {
-            UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-                
-                self.expandView.layer.transform = CATransform3DIdentity
-                },
-                completion: { finished in
-            })
-        }
-    }
     
     func showSeperatorIfNeeded()
     {
         if(lastCellInSection)
-        {
-            seperator.hidden = true
-        }
-        else if(isSectionRow && !isOpened)
         {
             seperator.hidden = true
         }

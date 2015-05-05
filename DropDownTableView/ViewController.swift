@@ -10,60 +10,49 @@ import UIKit
 
 class ViewController: DropDownTableViewController, DropDownTableViewDelegate
 {
-    var sections = [DropDownRow]()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         self.dropDownTableViewDelegate = self
-        
-        // make 4 dummy sections
-        var section1 = DropDownRow(title: "section 1", detail: "section 1d", thumbNail: .Due)
-        var section2 = DropDownRow(title: "section 2", detail: "section 2d", thumbNail: .Completed)
-        var section3 = DropDownRow(title: "section 3", detail: "section 3d", thumbNail: .Overdue)
-        var section4 = DropDownRow(title: "section 4", detail: "section 4d", thumbNail: .Incomplete)
-        
-        section1.subRows = [
-            DropDownRow(title: "row 1", detail: "row 1d", thumbNail: .Due),
-            DropDownRow(title: "row 2", detail: "row 2d", thumbNail: .Completed),
-            DropDownRow(title: "row 3", detail: "row 3d", thumbNail: .Overdue),
-            DropDownRow(title: "row 4", detail: "row 4d", thumbNail: .Incomplete)]
-        
-        section3.subRows = [
-            DropDownRow(title: "row 1", detail: "row 1d", thumbNail: .Due),
-            DropDownRow(title: "row 2", detail: "row 2d", thumbNail: .Completed),
-            DropDownRow(title: "row 3", detail: "row 3d", thumbNail: .Overdue),
-            DropDownRow(title: "row 4", detail: "row 4d", thumbNail: .Incomplete)]
-        
-        sections.append(section1)
-        sections.append(section2)
-        sections.append(section3)
-        sections.append(section4)
     }
     
     // MARK: - DropDownTableViewDelegate methods
     
     func dropDownTableView(tableView: UITableView, numberOfRowsInSectionWhenOpened section: Int) -> Int
     {
-        var dropDownSection = sections[section] as DropDownRow
-        return dropDownSection.subRows.count + 1
+        return 3
     }
     
     func numberOfSections(tableView: UITableView) -> Int
     {
-        return sections.count
+        return 3
     }
     
-    func dropDownTableView(tableView: UITableView, dropDownRowForSection section: Int) -> DropDownRow
+    func prepareTableView(tableView: UITableView, Section section: Int, Cell cell: DropDownTableViewCell) -> DropDownTableViewCell
     {
-        return sections[section]
+        cell.titleLabel.text = String(format: "Section Title %d", section)
+        cell.detailLabel.text = String(format: "Section detail %d", section)
+        cell.setThumbNailType(.Due, isLarge: true)
+        
+        return cell
     }
     
-    func dropDownTableView(tableView: UITableView, dropDownRowForSection section: Int, andRow row: Int) -> DropDownRow
+    func prepareTableView(tableView: UITableView, Section section: Int, Row row: Int, Cell cell: DropDownTableViewCell) -> DropDownTableViewCell
     {
-        var dropDownSection = sections[section] as DropDownRow
-        var dropDownRow = dropDownSection.subRows[row]
-        return dropDownRow
+        cell.titleLabel.text = String(format: "Section Title %d", section)
+        cell.detailLabel.text = String(format: "row detail %d", row)
+        cell.setThumbNailType(.Incomplete, isLarge: true)
+        
+        return cell
+    }
+    
+    func selectedTableView(tableView: UITableView, Section section: Int) {
+        
+    }
+    
+    func selectedTableView(tableView: UITableView, Section section: Int, Row row: Int) {
+        
     }
 }
