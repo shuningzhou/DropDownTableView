@@ -17,6 +17,7 @@ protocol DropDownTableViewDelegate
     
     func selectedTableView(tableView: UITableView, Section section: Int)
     func selectedTableView(tableView: UITableView, Section section: Int, Row row: Int)
+    func footerView(tableView: UITableView) -> UIView?;
 }
 
 
@@ -36,6 +37,7 @@ class DropDownTableViewController: UIViewController, UITableViewDataSource, UITa
         tableView.rowHeight = ROW_HEIGHT
         tableView.separatorStyle = .None
         tableView.dataSource = self
+        tableView.tableFooterView = dropDownTableViewDelegate!.footerView(tableView);
         self.view.addSubview(tableView)
     }
     

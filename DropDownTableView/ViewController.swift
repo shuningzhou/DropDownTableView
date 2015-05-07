@@ -55,4 +55,9 @@ class ViewController: DropDownTableViewController, DropDownTableViewDelegate
     func selectedTableView(tableView: UITableView, Section section: Int, Row row: Int) {
         
     }
+    
+    func footerView(tableView: UITableView) -> UIView?
+    {
+        return nil
+    }
 }
